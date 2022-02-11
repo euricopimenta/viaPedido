@@ -1,4 +1,4 @@
-object DM_viaPedidos: TDM_viaPedidos
+object DataBase: TDataBase
   OldCreateOrder = False
   Height = 272
   Width = 252
@@ -15,24 +15,12 @@ object DM_viaPedidos: TDM_viaPedidos
     Top = 8
   end
   object qryItem: TFDQuery
+    Active = True
     Connection = FDConnection1
     SQL.Strings = (
       'select * from Item')
     Left = 56
     Top = 80
-    object qryItemID_ITEM: TIntegerField
-      DisplayLabel = 'C'#243'digo'
-      FieldName = 'ID_ITEM'
-      Origin = 'ID_ITEM'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
-    end
-    object qryItemDESC_ITEM: TStringField
-      DisplayLabel = 'Descri'#231#227'o'
-      FieldName = 'DESC_ITEM'
-      Origin = 'DESC_ITEM'
-      Size = 100
-    end
   end
   object dtsItem: TDataSource
     DataSet = qryItem

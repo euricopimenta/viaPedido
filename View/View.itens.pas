@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Data.DB,
-  Vcl.Buttons, Vcl.Grids, Vcl.DBGrids, Model.DataModule;
+  Vcl.Buttons, Vcl.Grids, Vcl.DBGrids, Controller.Item;
 
 type
   Tfrm_Itens = class(TForm)
@@ -18,6 +18,7 @@ type
     btnAdd: TSpeedButton;
     btnRemover: TSpeedButton;
     btnSair: TSpeedButton;
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -26,9 +27,16 @@ type
 
 var
   frm_Itens: Tfrm_Itens;
-
+  controllerItem : TItemController;
 implementation
 
 {$R *.dfm}
+
+procedure Tfrm_Itens.FormCreate(Sender: TObject);
+begin
+
+ controllerItem := TItemController.Create;
+ edtCod.Text := controllerItem.getNovoCod;
+end;
 
 end.

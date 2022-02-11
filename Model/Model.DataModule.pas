@@ -11,14 +11,12 @@ uses
   FireDAC.Phys.FBDef;
 
 type
-  TDM_viaPedidos = class(TDataModule)
+  TDataBase = class(TDataModule)
     FDConnection1: TFDConnection;
     qryItem: TFDQuery;
     dtsItem: TDataSource;
     qryPedido: TFDQuery;
     dtsPedido: TDataSource;
-    qryItemID_ITEM: TIntegerField;
-    qryItemDESC_ITEM: TStringField;
     qryPedidoItem: TFDQuery;
     dtsPedidoItem: TDataSource;
     qryPedidoID_PEDIDO_CAB: TIntegerField;
@@ -38,7 +36,7 @@ type
   end;
 
 var
-  DM_viaPedidos: TDM_viaPedidos;
+  DataBase: TDataBase;
 
 implementation
 

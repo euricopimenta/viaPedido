@@ -25,6 +25,7 @@ object frm_Itens: Tfrm_Itens
   PrintScale = poPrintToFit
   Visible = True
   WindowState = wsMaximized
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object pnlItens: TPanel
@@ -46,10 +47,6 @@ object frm_Itens: Tfrm_Itens
     ParentDoubleBuffered = False
     TabOrder = 0
     StyleElements = []
-    ExplicitLeft = 50
-    ExplicitTop = 50
-    ExplicitWidth = 1166
-    ExplicitHeight = 461
     DesignSize = (
       609
       361)
@@ -79,7 +76,6 @@ object frm_Itens: Tfrm_Itens
       Color = clBtnFace
       TabOrder = 1
       TextHint = 'Descri'#231#227'o'
-      ExplicitWidth = 538
     end
     object dbgItem: TDBGrid
       Left = 16
@@ -88,7 +84,6 @@ object frm_Itens: Tfrm_Itens
       Height = 295
       Anchors = [akLeft, akTop, akRight, akBottom]
       Ctl3D = False
-      DataSource = DM_viaPedidos.dtsItem
       DrawingStyle = gdsGradient
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -115,8 +110,6 @@ object frm_Itens: Tfrm_Itens
       Color = clWhite
       ParentBackground = False
       TabOrder = 3
-      ExplicitLeft = 609
-      ExplicitHeight = 298
       DesignSize = (
         60
         359)
