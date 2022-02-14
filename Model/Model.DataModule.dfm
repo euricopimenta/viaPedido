@@ -1,6 +1,6 @@
-object DataBase: TDataBase
+﻿object DataBase: TDataBase
   OldCreateOrder = False
-  Height = 272
+  Height = 310
   Width = 252
   object FDConnection1: TFDConnection
     Params.Strings = (
@@ -15,24 +15,38 @@ object DataBase: TDataBase
     Top = 8
   end
   object qryItem: TFDQuery
+    Connection = FDConnection1
+    UpdateOptions.AssignedValues = [uvEDelete, uvEInsert, uvEUpdate, uvRefreshMode, uvCheckReadOnly]
+    UpdateOptions.RefreshMode = rmAll
+    UpdateOptions.CheckReadOnly = False
+    SQL.Strings = (
+      'select * from Item')
+    Left = 64
+    Top = 120
+    object qryItemID_ITEM: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'C'#243'digo'
+      DisplayWidth = 9
+      FieldName = 'ID_ITEM'
+      Origin = 'ID_ITEM'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object qryItemDESC_ITEM: TStringField
+      DisplayLabel = 'Descri'#231#227'o'
+      DisplayWidth = 90
+      FieldName = 'DESC_ITEM'
+      Origin = 'DESC_ITEM'
+      Size = 100
+    end
+  end
+  object qryPedido: TFDQuery
     Active = True
     Connection = FDConnection1
     SQL.Strings = (
-      'select * from Item')
-    Left = 56
-    Top = 80
-  end
-  object dtsItem: TDataSource
-    DataSet = qryItem
-    Left = 136
-    Top = 80
-  end
-  object qryPedido: TFDQuery
-    Connection = FDConnection1
-    SQL.Strings = (
       'select * from pedidocab')
-    Left = 56
-    Top = 144
+    Left = 64
+    Top = 176
     object qryPedidoID_PEDIDO_CAB: TIntegerField
       FieldName = 'ID_PEDIDO_CAB'
       Origin = 'ID_PEDIDO_CAB'
@@ -55,47 +69,69 @@ object DataBase: TDataBase
   end
   object dtsPedido: TDataSource
     DataSet = qryPedido
-    Left = 136
-    Top = 144
+    Left = 144
+    Top = 176
   end
   object qryPedidoItem: TFDQuery
     Connection = FDConnection1
     SQL.Strings = (
-      'select * from pedidoitem')
-    Left = 56
-    Top = 208
-    object qryPedidoItemID_PEDIDO_ITEM: TIntegerField
-      FieldName = 'ID_PEDIDO_ITEM'
-      Origin = 'ID_PEDIDO_ITEM'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
-    end
-    object qryPedidoItemID_PEDIDO_CAB: TIntegerField
-      FieldName = 'ID_PEDIDO_CAB'
-      Origin = 'ID_PEDIDO_CAB'
-      Required = True
-    end
-    object qryPedidoItemID_ITEM: TIntegerField
-      FieldName = 'ID_ITEM'
+      'select'
+      '    P.id_item "C'#243'digo",'
+      '    i.desc_item "Descri'#231#227'o",'
+      '    p.quantidade "Quant",'
+      '    p.valor_unitario "Valor",'
+      '    p.valor_total "Total"'
+      'from pedidoitem p'
+      'Left outer join item i on i.id_item = p.id_pedido_item'
+      'where p.id_pedido_cab = :IDPEDIDO')
+    Left = 64
+    Top = 240
+    ParamData = <
+      item
+        Name = 'IDPEDIDO'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+    object qryPedidoItemCódigo: TIntegerField
+      FieldName = 'C'#243'digo'
       Origin = 'ID_ITEM'
       Required = True
     end
-    object qryPedidoItemQUANTIDADE: TFloatField
-      FieldName = 'QUANTIDADE'
+    object qryPedidoItemDescrição: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'Descri'#231#227'o'
+      Origin = 'DESC_ITEM'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 50
+    end
+    object qryPedidoItemQuant: TFloatField
+      FieldName = 'Quant'
       Origin = 'QUANTIDADE'
     end
-    object qryPedidoItemVALOR_UNITARIO: TFloatField
-      FieldName = 'VALOR_UNITARIO'
+    object qryPedidoItemValor: TFloatField
+      FieldName = 'Valor'
       Origin = 'VALOR_UNITARIO'
     end
-    object qryPedidoItemVALOR_TOTAL: TFloatField
-      FieldName = 'VALOR_TOTAL'
+    object qryPedidoItemTotal: TFloatField
+      FieldName = 'Total'
       Origin = 'VALOR_TOTAL'
     end
   end
   object dtsPedidoItem: TDataSource
     DataSet = qryPedidoItem
-    Left = 136
-    Top = 208
+    Left = 144
+    Top = 240
+  end
+  object dtsItem: TDataSource
+    DataSet = qryItem
+    Left = 148
+    Top = 120
+  end
+  object Query: TFDQuery
+    Connection = FDConnection1
+    Left = 104
+    Top = 64
   end
 end

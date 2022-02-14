@@ -6,26 +6,29 @@ object frm_Pedido: Tfrm_Pedido
   Caption = 'Cadastro de Pedidos'
   ClientHeight = 572
   ClientWidth = 810
-  Color = clHighlightText
+  Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
-  Padding.Left = 3
-  Padding.Top = 3
-  Padding.Right = 3
-  Padding.Bottom = 3
+  Padding.Left = 20
+  Padding.Top = 15
+  Padding.Right = 20
+  Padding.Bottom = 15
   OldCreateOrder = False
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object pnlHeader: TPanel
-    Left = 3
-    Top = 3
-    Width = 804
-    Height = 146
+    AlignWithMargins = True
+    Left = 23
+    Top = 18
+    Width = 764
+    Height = 98
     Align = alTop
     BevelOuter = bvNone
+    Color = clWhite
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
@@ -34,353 +37,383 @@ object frm_Pedido: Tfrm_Pedido
     ParentBackground = False
     ParentFont = False
     TabOrder = 0
-    object PageControl1: TPageControl
-      Left = 0
-      Top = 0
-      Width = 804
-      Height = 146
-      ActivePage = tabConsultaPedido
-      Align = alClient
-      HotTrack = True
+    ExplicitLeft = 20
+    ExplicitTop = 15
+    ExplicitWidth = 770
+    DesignSize = (
+      764
+      98)
+    object btnNovoPedido: TSpeedButton
+      Left = 656
+      Top = 15
+      Width = 86
+      Height = 32
+      Anchors = [akTop, akRight]
+      Caption = 'Novo'
+      Flat = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clHighlight
+      Font.Height = -19
+      Font.Name = 'Segoe UI Semilight'
+      Font.Style = []
+      Glyph.Data = {
+        36100000424D3610000000000000360000002800000020000000200000000100
+        2000000000000010000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        000000000000000000000000000000FF000159A01B56589D18B6559A16E85397
+        14F9509412DE4E92119A4D8E122B000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000059A61A145DA41CBE5AA11AFF589D18FF559A16FF5397
+        14FF509412FF4D9110FF4B8D0FFC498A0C7E00FF000100000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        00000000000055AA1C095FA71ECB5DA41CFF5AA11AFF589D18FF559A16FF5397
+        14FF509412FF4D9110FF4B8D0FFF488A0DFF47880A7E00000000000000000000
+        000000000000000000000000000000000000FFE5514FFFE74FA7FFE650AAFFE6
+        50AAFFE650AAFFE650AAFFE650AAFFE650AAFFE650AAFFE650AAFFE650AAFFE6
+        50AAECD549AE90B22EDA5FA71EFF5DA41CFF5AA11AFF589D18FF76AD43FFC0D9
+        A9FF509412FF4D9110FF4B8D0FFF488A0DFF46870BFC41820C2B000000000000
+        000000000000000000000000000000000000FFE650F2FFE650FFFFE650FFFFE6
+        50FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE6
+        50FFDECA46FF69AA22FF5FA71EFF5DA41CFF5AA11AFF589D18FF8EBC64FFFFFF
+        FFFF509412FF4D9110FF4B8D0FFF488A0DFF46870BFF4284089A000000000000
+        000000000000000000000000000000000000FFE650FFFFE650FFFFE650FFFFE6
+        50FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFBE2
+        4FFFC0BE3DFF62AA1FFF5FA71EFF5DA41CFF5AA11AFF589D18FF8EBC64FFFFFF
+        FFFF509412FF4D9110FF4B8D0FFF488A0DFF46870BFF438409DE000000000000
+        000000000000000000000000000000000000FFE650FFFFE650FFFFE650FFFFE6
+        50FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFF9E1
+        4EFFB3BA39FF62AA1FFF5FA71EFF5DA41CFFFAFCF8FFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFBDD5A7FF488A0DFF46870BFF438409F8000000000000
+        000000000000000000000000000000000000FFE650FFFFE650FFFFE650FFFFE6
+        50FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFAE1
+        4EFFB8BC3AFF62AA1FFF5FA71EFF5DA41CFF8CBD5FFF90BE65FFB4D298FFFFFF
+        FFFF8AB861FF88B660FF6EA33DFF488A0DFF46870BFF438409E9000000000000
+        000000000000000000000000000000000000FFE650FFFFE650FFDEC33AFFDEC3
+        3AFFFFE650FFEAD042FFDBBE37FFDBBE37FFDBBE37FFDBBE37FFDBBE37FFDABD
+        37FFB7A42EFF63A920FF5FA71EFF5DA41CFF5AA11AFF589D18FF8EBC64FFFFFF
+        FFFF509412FF4D9110FF4B8D0FFF488A0DFF46870BFF448408B5000000000000
+        000000000000000000000000000000000000FFE650FFFFE650FF967308FF9673
+        08FFFFE650FFBA9B20FF937005FF937005FF937005FF937005FF937005FF9370
+        05FF856505FF679016FF5FA71EFF5DA41CFF5AA11AFF589D18FF88B85CFFFAFC
+        F8FF509412FF4D9110FF4B8D0FFF488A0DFF46870BFF44850956000000000000
+        000000000000000000000000000000000000FFE650FFFFE650FFFFE650FFFFE6
+        50FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE6
+        50FFF8E04EFFC8C13EFF65A71FFF5DA41CFF5AA11AFF589D18FF559A16FF5397
+        14FF509412FF4D9110FF4B8D0FFF488A0DFF46880BBE00FF0001000000000000
+        000000000000000000000000000000000000FFE650FFFFE650FFBA9B20FFBA9B
+        20FFFFE650FFD2B531FFB7981EFFB7981EFFB7981EFFB7981EFFB7981EFFB798
+        1EFFB7981EFFAC8F1CFF8A8B1AFF60A11BFF5AA11AFF589D18FF559A16FF5397
+        14FF509412FF4D9110FF4B8D0FFF488A0DCB408C0D1400000000000000000000
+        000000000000000000000000000000000000FFE650FFFFE650FFBA9B20FFBA9B
+        20FFFFE650FFD2B531FFB7981EFFB7981EFFB7981EFFB7981EFFB7981EFFB798
+        1EFFB7981EFFB7981EFFAD901CFF94881AFF6C941AFF599D18FF559A16FF5397
+        14FF509412FF4D9110ED4A8D0E7F558E00090000000000000000000000000000
+        000000000000000000000000000000000000FFE650FFFFE650FFFFE650FFFFE6
+        50FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE6
+        50FFFFE650FFFFE650FFFFE650FFFAE14EFFEBD44AFFD7C844FFBBBB39FFB1B8
+        36FF509213364080000400000000000000000000000000000000000000000000
+        000000000000000000000000000000000000FFE650FFFFE650FF967308FF9673
+        08FFFFE650FFBA9B20FF937005FF937005FF937005FF937005FF937005FF9370
+        05FF937005FF937005FF937005FF937005FF937005FF967308FFFDE44FFFFDE4
+        4FFF000000000000000000000000000000000000000000000000000000000000
+        000000000000000000000000000000000000FFE650FFFFE650FFDEC33AFFDEC3
+        3AFFFFE650FFEAD042FFDBBE37FFDBBE37FFDBBE37FFDBBE37FFDBBE37FFDBBE
+        37FFDBBE37FFDBBE37FFDBBE37FFDBBE37FFDBBE37FFDEC33AFFFFE650FFFFE6
+        50FF000000000000000000000000000000000000000000000000000000000000
+        000000000000000000000000000000000000FFE650FFFFE650FFFFE650FFFFE6
+        50FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE6
+        50FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE6
+        50FF000000000000000000000000000000000000000000000000000000000000
+        000000000000000000000000000000000000FFE650FFFFE650FFFFE650FFFFE6
+        50FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE6
+        50FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE6
+        50FF000000000000000000000000000000000000000000000000000000000000
+        000000000000000000000000000000000000FFE650FFFFE650FF967308FF9370
+        05FF937005FF937005FF937005FF937005FF937005FF937005FF937005FF9370
+        05FF937005FF937005FF937005FF937005FF937005FF967308FFFFE650FFFFE6
+        50FF000000000000000000000000000000000000000000000000000000000000
+        000000000000000000000000000000000000FFE650FFFFE650FFDEC33AFFDBBE
+        37FFDBBE37FFDBBE37FFDBBE37FFDBBE37FFDBBE37FFDBBE37FFDBBE37FFDBBE
+        37FFDBBE37FFDBBE37FFDBBE37FFDBBE37FFDBBE37FFDEC33AFFFFE650FFFFE6
+        50FF000000000000000000000000000000000000000000000000000000000000
+        000000000000000000000000000000000000FFE650FFFFE650FFFFE650FFFFE6
+        50FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE6
+        50FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE6
+        50FF000000000000000000000000000000000000000000000000000000000000
+        000000000000000000000000000000000000FFE650FFFFE650FFFFE650FFFFE6
+        50FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE6
+        50FFFFE450FFEAAF3FFFE39E3AFFE39E3AFFE29E39FFE29F38FFE29F38FFE8B1
+        3DDF000000000000000000000000000000000000000000000000000000000000
+        000000000000000000000000000000000000FFE650FFFFE650FFFFE650FFFFE6
+        50FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE6
+        50FFF3C747FFD57A2FFFD57A2EFFD47A2DFFD37B2CFFD37B2BFFDA8F30F4EEB3
+        3C1E000000000000000000000000000000000000000000000000000000000000
+        000000000000000000000000000000000000FFE650FFFFE650FFFFE650FFFFE6
+        50FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE6
+        50FFF1C245FFD57A2EFFD47A2DFFD37B2CFFD37B2BFFDA8E30F5E8AA3E210000
+        0000000000000000000000000000000000000000000000000000000000000000
+        000000000000000000000000000000000000FFE650FFFFE650FFFFE650FFFFE6
+        50FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE6
+        50FFF1C244FFD47A2DFFD37B2CFFD37B2BFFDA8E30F5E8AA3E21000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        000000000000000000000000000000000000FFE650FFFFE650FFFFE650FFFFE6
+        50FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE6
+        50FFF1C244FFD37B2CFFD37B2BFFDA8E30F5E8AA3E2100000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        000000000000000000000000000000000000FFE650FFFFE650FFFFE650FFFFE6
+        50FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE6
+        50FFF0C244FFD37B2BFFDA8E30F5E8AA3E210000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        000000000000000000000000000000000000FFE650F3FFE650FFFFE650FFFFE6
+        50FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE650FFFFE6
+        50FFF0C243FFD98D2FF4E6AA3C1E000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        000000000000000000000000000000000000FFE64F51FFE74FA7FFE650AAFFE6
+        50AAFFE650AAFFE650AAFFE650AAFFE650AAFFE650AAFFE650AAFFE650AAFFE6
+        50AAF3CB47ADECB3391B00000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000}
+      Margin = 0
+      ParentFont = False
+      OnClick = btnNovoPedidoClick
+    end
+    object edtNumero: TEdit
+      Left = 6
+      Top = 15
+      Width = 127
+      Height = 32
+      Alignment = taCenter
+      BevelInner = bvNone
+      BevelOuter = bvNone
+      BorderStyle = bsNone
+      Color = clBtnFace
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -16
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      NumbersOnly = True
+      ParentFont = False
       TabOrder = 0
-      object tabNovoPedido: TTabSheet
-        Caption = 'Novo Pedido'
-        OnShow = tabNovoPedidoShow
-        ExplicitTop = 24
-        ExplicitHeight = 118
-        object pnlNovoPedido: TPanel
-          Left = 0
-          Top = 0
-          Width = 796
-          Height = 113
-          Align = alClient
-          BevelOuter = bvNone
-          Color = clWhite
-          Font.Charset = ANSI_CHARSET
-          Font.Color = 5263440
-          Font.Height = -16
-          Font.Name = 'Segoe UI Semilight'
-          Font.Style = []
-          ParentBackground = False
-          ParentFont = False
-          TabOrder = 0
-          ExplicitHeight = 118
-          DesignSize = (
-            796
-            113)
-          object edtNumero: TEdit
-            Left = 6
-            Top = 15
-            Width = 127
-            Height = 32
-            Alignment = taCenter
-            BevelInner = bvNone
-            BevelOuter = bvNone
-            BorderStyle = bsNone
-            Color = clBtnFace
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clBlack
-            Font.Height = -16
-            Font.Name = 'Segoe UI'
-            Font.Style = []
-            ParentFont = False
-            TabOrder = 0
-            TextHint = 'N'#186' Pedido'
-          end
-          object edtCliente: TEdit
-            Left = 139
-            Top = 15
-            Width = 503
-            Height = 32
-            Alignment = taCenter
-            Anchors = [akLeft, akTop, akRight]
-            BevelInner = bvNone
-            BevelOuter = bvNone
-            BorderStyle = bsNone
-            Color = clBtnFace
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clBlack
-            Font.Height = -16
-            Font.Name = 'Segoe UI'
-            Font.Style = []
-            ParentFont = False
-            TabOrder = 1
-            TextHint = 'Nome Cliente'
-          end
-          object CalendarPicker1: TCalendarPicker
-            Left = 648
-            Top = 15
-            Height = 32
-            Anchors = [akTop, akRight]
-            CalendarHeaderInfo.DaysOfWeekFont.Charset = DEFAULT_CHARSET
-            CalendarHeaderInfo.DaysOfWeekFont.Color = clWindowText
-            CalendarHeaderInfo.DaysOfWeekFont.Height = -13
-            CalendarHeaderInfo.DaysOfWeekFont.Name = 'Segoe UI'
-            CalendarHeaderInfo.DaysOfWeekFont.Style = []
-            CalendarHeaderInfo.Font.Charset = DEFAULT_CHARSET
-            CalendarHeaderInfo.Font.Color = clWindowText
-            CalendarHeaderInfo.Font.Height = -20
-            CalendarHeaderInfo.Font.Name = 'Segoe UI'
-            CalendarHeaderInfo.Font.Style = []
-            Color = clBtnFace
-            Date = 44600.000000000000000000
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clGray
-            Font.Height = -16
-            Font.Name = 'Segoe UI'
-            Font.Style = []
-            IsEmpty = False
-            ParentFont = False
-            TabOrder = 2
-            TextHint = 'select a date'
-          end
-          object pnlItens: TPanel
-            Left = 0
-            Top = 72
-            Width = 796
-            Height = 41
-            Align = alBottom
-            BevelOuter = bvNone
-            Color = clWhite
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clBlack
-            Font.Height = -16
-            Font.Name = 'Segoe UI'
-            Font.Style = []
-            ParentBackground = False
-            ParentFont = False
-            TabOrder = 3
-            ExplicitTop = 77
-            DesignSize = (
-              796
-              41)
-            object edtCodItem: TEdit
-              Left = 6
-              Top = 2
-              Width = 127
-              Height = 32
-              Alignment = taCenter
-              AutoSize = False
-              BevelInner = bvNone
-              BevelOuter = bvNone
-              BorderStyle = bsNone
-              Color = clBtnFace
-              Font.Charset = ANSI_CHARSET
-              Font.Color = clBlack
-              Font.Height = -16
-              Font.Name = 'Segoe UI'
-              Font.Style = []
-              ParentFont = False
-              TabOrder = 0
-              TextHint = 'Cod Item'
-            end
-            object edtDescricaoItem: TEdit
-              Left = 139
-              Top = 1
-              Width = 250
-              Height = 32
-              Alignment = taCenter
-              Anchors = [akLeft, akTop, akRight]
-              BevelInner = bvNone
-              BevelOuter = bvNone
-              BorderStyle = bsNone
-              Color = clBtnFace
-              Font.Charset = ANSI_CHARSET
-              Font.Color = clBlack
-              Font.Height = -16
-              Font.Name = 'Segoe UI'
-              Font.Style = []
-              ParentFont = False
-              TabOrder = 1
-              TextHint = 'Descri'#231#227'o'
-            end
-            object edtQuantidade: TEdit
-              Left = 395
-              Top = 1
-              Width = 127
-              Height = 32
-              Alignment = taCenter
-              Anchors = [akRight]
-              AutoSize = False
-              BevelInner = bvNone
-              BevelOuter = bvNone
-              BorderStyle = bsNone
-              Color = clBtnFace
-              Font.Charset = ANSI_CHARSET
-              Font.Color = clBlack
-              Font.Height = -16
-              Font.Name = 'Segoe UI'
-              Font.Style = []
-              ParentFont = False
-              TabOrder = 2
-              TextHint = 'Quant.'
-            end
-            object edtValor: TEdit
-              Left = 528
-              Top = 1
-              Width = 127
-              Height = 32
-              Alignment = taCenter
-              Anchors = [akRight]
-              AutoSize = False
-              BevelInner = bvNone
-              BevelOuter = bvNone
-              BorderStyle = bsNone
-              Color = clBtnFace
-              Font.Charset = ANSI_CHARSET
-              Font.Color = clBlack
-              Font.Height = -16
-              Font.Name = 'Segoe UI'
-              Font.Style = []
-              ParentFont = False
-              TabOrder = 3
-              TextHint = 'Valor'
-            end
-            object edtValorTotal: TEdit
-              Left = 661
-              Top = 1
-              Width = 127
-              Height = 32
-              Alignment = taCenter
-              Anchors = [akRight]
-              AutoSize = False
-              BevelInner = bvNone
-              BevelOuter = bvNone
-              BorderStyle = bsNone
-              Color = clBtnFace
-              Font.Charset = ANSI_CHARSET
-              Font.Color = clBlack
-              Font.Height = -16
-              Font.Name = 'Segoe UI'
-              Font.Style = []
-              ParentFont = False
-              ReadOnly = True
-              TabOrder = 4
-              Text = 'Total'
-              TextHint = 'Total'
-            end
-          end
-        end
+      TextHint = 'N'#186' Pedido'
+    end
+    object edtCliente: TEdit
+      Left = 139
+      Top = 15
+      Width = 366
+      Height = 32
+      Alignment = taCenter
+      Anchors = [akLeft, akTop, akRight]
+      BevelInner = bvNone
+      BevelOuter = bvNone
+      BorderStyle = bsNone
+      Color = clBtnFace
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -16
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+      TextHint = 'Nome Cliente'
+    end
+    object dateEdtPedido: TCalendarPicker
+      Left = 511
+      Top = 15
+      Width = 139
+      Height = 32
+      Anchors = [akTop, akRight]
+      CalendarHeaderInfo.DaysOfWeekFont.Charset = DEFAULT_CHARSET
+      CalendarHeaderInfo.DaysOfWeekFont.Color = clWindowText
+      CalendarHeaderInfo.DaysOfWeekFont.Height = -13
+      CalendarHeaderInfo.DaysOfWeekFont.Name = 'Segoe UI'
+      CalendarHeaderInfo.DaysOfWeekFont.Style = []
+      CalendarHeaderInfo.Font.Charset = DEFAULT_CHARSET
+      CalendarHeaderInfo.Font.Color = clWindowText
+      CalendarHeaderInfo.Font.Height = -20
+      CalendarHeaderInfo.Font.Name = 'Segoe UI'
+      CalendarHeaderInfo.Font.Style = []
+      Color = clBtnFace
+      Date = 44600.000000000000000000
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clGray
+      Font.Height = -16
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      IsEmpty = False
+      ParentFont = False
+      TabOrder = 2
+      TextHint = 'select a date'
+    end
+    object pnlItens: TPanel
+      Left = 0
+      Top = 57
+      Width = 764
+      Height = 41
+      Align = alBottom
+      BevelOuter = bvNone
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -16
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentBackground = False
+      ParentFont = False
+      TabOrder = 3
+      ExplicitTop = 53
+      ExplicitWidth = 770
+      DesignSize = (
+        764
+        41)
+      object edtCodItem: TEdit
+        Left = 6
+        Top = 2
+        Width = 127
+        Height = 32
+        Alignment = taCenter
+        AutoSize = False
+        BevelInner = bvNone
+        BevelOuter = bvNone
+        BorderStyle = bsNone
+        Color = clBtnFace
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -16
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        NumbersOnly = True
+        ParentFont = False
+        TabOrder = 0
+        TextHint = 'Cod Item'
+        OnExit = edtDescricaoItemEnter
       end
-      object tabConsultaPedido: TTabSheet
-        Caption = 'Consultar Pedido'
-        ImageIndex = 1
-        OnShow = tabConsultaPedidoShow
-        ExplicitLeft = -1
-        ExplicitTop = 33
-        object edtPesqItem: TEdit
-          Left = 25
-          Top = 41
-          Width = 503
-          Height = 32
-          Alignment = taCenter
-          BevelInner = bvNone
-          BevelOuter = bvNone
-          BorderStyle = bsNone
-          Color = clBtnFace
-          Enabled = False
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clBlack
-          Font.Height = -16
-          Font.Name = 'Segoe UI'
-          Font.Style = []
-          ParentFont = False
-          TabOrder = 0
-          Text = 'Nome Item'
-          TextHint = 'Nome Item'
-        end
-        object edtPesqCliente: TEdit
-          Left = 25
-          Top = 78
-          Width = 503
-          Height = 32
-          Alignment = taCenter
-          BevelInner = bvNone
-          BevelOuter = bvNone
-          BorderStyle = bsNone
-          Color = clBtnFace
-          Enabled = False
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clBlack
-          Font.Height = -16
-          Font.Name = 'Segoe UI'
-          Font.Style = []
-          ParentFont = False
-          TabOrder = 1
-          Text = 'Nome Cliente'
-          TextHint = 'Nome Cliente'
-        end
-        object datePesqData: TCalendarPicker
-          Left = 25
-          Top = 3
-          Height = 32
-          CalendarHeaderInfo.DaysOfWeekFont.Charset = DEFAULT_CHARSET
-          CalendarHeaderInfo.DaysOfWeekFont.Color = clWindowText
-          CalendarHeaderInfo.DaysOfWeekFont.Height = -13
-          CalendarHeaderInfo.DaysOfWeekFont.Name = 'Segoe UI'
-          CalendarHeaderInfo.DaysOfWeekFont.Style = []
-          CalendarHeaderInfo.Font.Charset = DEFAULT_CHARSET
-          CalendarHeaderInfo.Font.Color = clWindowText
-          CalendarHeaderInfo.Font.Height = -20
-          CalendarHeaderInfo.Font.Name = 'Segoe UI'
-          CalendarHeaderInfo.Font.Style = []
-          Color = clBtnFace
-          Date = 44600.000000000000000000
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clGray
-          Font.Height = -16
-          Font.Name = 'Segoe UI'
-          Font.Style = []
-          IsEmpty = False
-          ParentFont = False
-          TabOrder = 2
-          TextHint = 'select a date'
-        end
-        object chkPesqData: TCheckBox
-          Left = 0
-          Top = 3
-          Width = 20
-          Height = 32
-          Alignment = taLeftJustify
-          Checked = True
-          State = cbChecked
-          TabOrder = 3
-        end
-        object chkPesqItem: TCheckBox
-          Left = 0
-          Top = 40
-          Width = 20
-          Height = 32
-          Alignment = taLeftJustify
-          TabOrder = 4
-        end
-        object chkCliente: TCheckBox
-          Left = 0
-          Top = 78
-          Width = 20
-          Height = 32
-          Alignment = taLeftJustify
-          TabOrder = 5
-        end
+      object edtDescricaoItem: TEdit
+        Left = 139
+        Top = 1
+        Width = 204
+        Height = 32
+        Alignment = taCenter
+        Anchors = [akLeft, akTop, akRight]
+        BevelInner = bvNone
+        BevelOuter = bvNone
+        BorderStyle = bsNone
+        Color = clBtnFace
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -16
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
+        TextHint = 'Descri'#231#227'o'
+        OnEnter = edtDescricaoItemEnter
+        ExplicitWidth = 210
+      end
+      object edtQuantidade: TEdit
+        Left = 349
+        Top = 1
+        Width = 127
+        Height = 32
+        Alignment = taCenter
+        Anchors = [akRight]
+        AutoSize = False
+        BevelInner = bvNone
+        BevelOuter = bvNone
+        BorderStyle = bsNone
+        Color = clBtnFace
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -16
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 2
+        TextHint = 'Quant.'
+        ExplicitLeft = 355
+      end
+      object edtValor: TEdit
+        Left = 482
+        Top = 1
+        Width = 127
+        Height = 32
+        Alignment = taCenter
+        Anchors = [akRight]
+        AutoSize = False
+        BevelInner = bvNone
+        BevelOuter = bvNone
+        BorderStyle = bsNone
+        Color = clBtnFace
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -16
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 3
+        TextHint = 'Valor'
+        ExplicitLeft = 488
+      end
+      object edtValorTotal: TEdit
+        Left = 615
+        Top = 1
+        Width = 127
+        Height = 32
+        Alignment = taCenter
+        Anchors = [akRight]
+        AutoSize = False
+        BevelInner = bvNone
+        BevelOuter = bvNone
+        BorderStyle = bsNone
+        Color = clBtnFace
+        Enabled = False
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -16
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 4
+        Text = 'Total'
+        TextHint = 'Total'
+        ExplicitLeft = 621
       end
     end
   end
   object pnlFooter: TPanel
-    Left = 3
-    Top = 504
-    Width = 804
+    Left = 20
+    Top = 492
+    Width = 770
     Height = 65
     Align = alBottom
     BevelOuter = bvNone
     ParentBackground = False
     TabOrder = 1
+    ExplicitLeft = 3
+    ExplicitTop = 504
+    ExplicitWidth = 804
     DesignSize = (
-      804
+      770
       65)
     object shpPedido: TShape
       Left = 0
       Top = 0
-      Width = 804
+      Width = 770
       Height = 65
       Align = alClient
       Brush.Color = 4208934
@@ -404,10 +437,10 @@ object frm_Pedido: Tfrm_Pedido
       Caption = 'Voltar'
       Flat = True
       Font.Charset = ANSI_CHARSET
-      Font.Color = clWhite
-      Font.Height = -21
-      Font.Name = 'Segoe UI Semibold'
-      Font.Style = [fsBold]
+      Font.Color = clGradientActiveCaption
+      Font.Height = -19
+      Font.Name = 'Segoe UI Semilight'
+      Font.Style = []
       Glyph.Data = {
         46270000424D4627000000000000360000002800000032000000320000000100
         2000000000001027000000000000000000000000000000000000000000000000
@@ -726,9 +759,10 @@ object frm_Pedido: Tfrm_Pedido
         00000000000000000000}
       ParentFont = False
       Spacing = 20
+      OnClick = btnVoltarClick
     end
     object btnSalvar: TSpeedButton
-      Left = 636
+      Left = 602
       Top = 9
       Width = 156
       Height = 50
@@ -736,10 +770,10 @@ object frm_Pedido: Tfrm_Pedido
       Caption = 'Salvar'
       Flat = True
       Font.Charset = ANSI_CHARSET
-      Font.Color = clWhite
-      Font.Height = -21
-      Font.Name = 'Segoe UI Semibold'
-      Font.Style = [fsBold]
+      Font.Color = clMoneyGreen
+      Font.Height = -19
+      Font.Name = 'Segoe UI Semilight'
+      Font.Style = []
       Glyph.Data = {
         46270000424D4627000000000000360000002800000032000000320000000100
         2000000000001027000000000000000000000000000000000000000000000000
@@ -1058,20 +1092,21 @@ object frm_Pedido: Tfrm_Pedido
         00000000000000000000}
       ParentFont = False
       Spacing = 20
+      ExplicitLeft = 636
     end
     object btnRemoverPedido: TSpeedButton
-      Left = 289
+      Left = 255
       Top = 9
       Width = 227
       Height = 50
       Anchors = [akRight, akBottom]
-      Caption = 'Remover Pedido'
+      Caption = 'Apagar Pedido'
       Flat = True
       Font.Charset = ANSI_CHARSET
-      Font.Color = clWhite
-      Font.Height = -21
-      Font.Name = 'Segoe UI Semibold'
-      Font.Style = [fsBold]
+      Font.Color = 10930928
+      Font.Height = -19
+      Font.Name = 'Segoe UI Semilight'
+      Font.Style = []
       Glyph.Data = {
         46270000424D4627000000000000360000002800000032000000320000000100
         2000000000001027000000000000000000000000000000000000000000000000
@@ -1390,52 +1425,63 @@ object frm_Pedido: Tfrm_Pedido
         00000000000000000000}
       ParentFont = False
       Spacing = 20
+      ExplicitLeft = 289
     end
   end
   object pnlClient: TPanel
     AlignWithMargins = True
-    Left = 6
-    Top = 152
-    Width = 798
-    Height = 349
+    Left = 23
+    Top = 122
+    Width = 764
+    Height = 367
     Align = alClient
     BevelOuter = bvNone
     ParentBackground = False
     TabOrder = 2
-    ExplicitHeight = 373
+    ExplicitTop = 164
+    ExplicitHeight = 325
     object dbgPedidos: TDBGrid
       AlignWithMargins = True
       Left = 3
       Top = 3
-      Width = 732
-      Height = 343
+      Width = 698
+      Height = 361
       Align = alClient
       DrawingStyle = gdsGradient
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+      ParentFont = False
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'Tahoma'
+      TitleFont.Color = 5263440
+      TitleFont.Height = -16
+      TitleFont.Name = 'Segoe UI'
       TitleFont.Style = []
     end
     object pnlControls: TPanel
-      Left = 738
+      Left = 704
       Top = 0
       Width = 60
-      Height = 349
+      Height = 367
       Align = alRight
       BevelOuter = bvNone
       Color = clWhite
       ParentBackground = False
       TabOrder = 1
+      ExplicitLeft = 738
+      ExplicitHeight = 349
       DesignSize = (
         60
-        349)
+        367)
       object Shape1: TShape
         Left = 0
         Top = 0
         Width = 60
-        Height = 349
+        Height = 367
         Align = alClient
         Brush.Color = 4208934
         Pen.Style = psClear

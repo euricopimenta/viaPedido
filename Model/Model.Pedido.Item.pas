@@ -8,9 +8,7 @@ Uses Model.Item;
     FIDPedidoItem: Integer;
     FValUnitario: Double;
     FQuantidade: Double;
-    FIDPedido: Integer;
     FValTotal: Double;
-    procedure SetIDPedido(const Value: Integer);
     procedure SetIDPedidoItem(const Value: Integer);
     procedure SetQuantidade(const Value: Double);
     procedure SetValTotal(const Value: Double);
@@ -18,19 +16,23 @@ Uses Model.Item;
   published
     Item : TItem;
     Property IDPedidoItem : Integer read FIDPedidoItem write SetIDPedidoItem;
-    Property IDPedido : Integer read FIDPedido write SetIDPedido;
     Property Quantidade : Double read FQuantidade write SetQuantidade;
     Property ValUnitario : Double read FValUnitario write SetValUnitario;
     Property ValTotal : Double read FValTotal write SetValTotal;
+  Public
+    Constructor Create ;
+    Destructor Destroy ; Override;
+
   End;
 
 implementation
 
 { TPedidoItem }
 
-procedure TPedidoItem.SetIDPedido(const Value: Integer);
+
+constructor TPedidoItem.Create;
 begin
-  FIDPedido := Value;
+  Item := TItem.Create;
 end;
 
 procedure TPedidoItem.SetIDPedidoItem(const Value: Integer);
@@ -51,6 +53,12 @@ end;
 procedure TPedidoItem.SetValUnitario(const Value: Double);
 begin
   FValUnitario := Value;
+end;
+
+destructor TPedidoItem.Destroy;
+begin
+  Item.Free;
+  inherited;
 end;
 
 end.

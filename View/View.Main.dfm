@@ -11,20 +11,16 @@ object frm_Main: Tfrm_Main
   Font.Height = -19
   Font.Name = 'Segoe UI'
   Font.Style = []
-  Padding.Left = 3
-  Padding.Top = 3
-  Padding.Right = 3
-  Padding.Bottom = 3
   OldCreateOrder = False
   WindowState = wsMaximized
   PixelsPerInch = 96
   TextHeight = 25
   object pnlMenuLateral: TPanel
     AlignWithMargins = True
-    Left = 6
-    Top = 83
+    Left = 3
+    Top = 80
     Width = 206
-    Height = 494
+    Height = 500
     Align = alLeft
     BevelOuter = bvNone
     Color = clWhite
@@ -32,25 +28,25 @@ object frm_Main: Tfrm_Main
     TabOrder = 0
     DesignSize = (
       206
-      494)
+      500)
     object Shape2: TShape
       Left = 0
       Top = 0
       Width = 206
-      Height = 494
+      Height = 500
       Align = alClient
       Brush.Color = 5063725
       Pen.Color = clWhite
       Pen.Style = psClear
       Pen.Width = 5
-      ExplicitLeft = -8
-      ExplicitWidth = 193
-      ExplicitHeight = 481
+      ExplicitLeft = 8
+      ExplicitTop = -22
+      ExplicitHeight = 494
     end
     object btnSair: TSpeedButton
       AlignWithMargins = True
       Left = 8
-      Top = 411
+      Top = 417
       Width = 189
       Height = 68
       Cursor = crHandPoint
@@ -67,57 +63,85 @@ object frm_Main: Tfrm_Main
       OnClick = btnSairClick
       ExplicitTop = 395
     end
-    object btnItem: TSpeedButton
-      Left = 8
-      Top = 11
-      Width = 189
-      Height = 68
-      Cursor = crHandPoint
-      Caption = 'Item'
-      Flat = True
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -19
-      Font.Name = 'Segoe UI Semibold'
-      Font.Style = [fsBold]
-      ParentFont = False
-      Transparent = False
-      OnClick = btnItemClick
-    end
-    object btnPedido: TSpeedButton
-      Left = 8
-      Top = 85
-      Width = 189
-      Height = 68
-      Cursor = crHandPoint
-      Caption = 'Pedido'
-      Flat = True
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -19
-      Font.Name = 'Segoe UI Semibold'
-      Font.Style = [fsBold]
-      ParentFont = False
-      Transparent = False
-      OnClick = btnPedidoClick
-    end
-    object shpFocus: TShape
-      Left = 12
-      Top = 16
-      Width = 7
-      Height = 57
-      Brush.Color = 3026662
-      Pen.Color = 3026662
-      Pen.Style = psClear
-      Shape = stRoundRect
-      Visible = False
+    object pnlBotoes: TPanel
+      Left = 3
+      Top = 0
+      Width = 203
+      Height = 405
+      BevelOuter = bvNone
+      Ctl3D = False
+      ParentBackground = False
+      ParentCtl3D = False
+      TabOrder = 0
+      DesignSize = (
+        203
+        405)
+      object Shape1: TShape
+        Left = -33
+        Top = -3
+        Width = 236
+        Height = 418
+        Anchors = [akLeft, akTop, akRight, akBottom]
+        Brush.Color = 5063725
+        Pen.Color = clWhite
+        Pen.Style = psClear
+        Pen.Width = 5
+        ExplicitWidth = 239
+        ExplicitHeight = 206
+      end
+      object btnItem: TSpeedButton
+        Left = 5
+        Top = 7
+        Width = 189
+        Height = 68
+        Cursor = crHandPoint
+        Anchors = [akLeft, akTop, akRight, akBottom]
+        Caption = 'Item'
+        Flat = True
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = 'Segoe UI Semibold'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = False
+        OnClick = btnItemClick
+      end
+      object btnPedido: TSpeedButton
+        Left = 5
+        Top = 81
+        Width = 189
+        Height = 68
+        Cursor = crHandPoint
+        Caption = 'Pedido'
+        Flat = True
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = 'Segoe UI Semibold'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = False
+        OnClick = btnPedidoClick
+      end
+      object shpFocus: TShape
+        Left = 5
+        Top = 13
+        Width = 7
+        Height = 57
+        Brush.Color = 3026662
+        Pen.Color = 3026662
+        Pen.Style = psClear
+        Shape = stRoundRect
+        Visible = False
+      end
     end
   end
   object pnlHeader: TPanel
     AlignWithMargins = True
-    Left = 6
-    Top = 6
-    Width = 746
+    Left = 3
+    Top = 3
+    Width = 752
     Height = 71
     Align = alTop
     BevelOuter = bvNone
@@ -667,17 +691,42 @@ object frm_Main: Tfrm_Main
       OnMouseEnter = Image1MouseEnter
       OnMouseLeave = Image1MouseLeave
     end
+    object lblTituloRotina: TLabel
+      AlignWithMargins = True
+      Left = 572
+      Top = 3
+      Width = 165
+      Height = 65
+      Margins.Right = 15
+      Align = alRight
+      Alignment = taRightJustify
+      Caption = 'T'#237'tulo da Rotina'
+      Color = 4274982
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clMoneyGreen
+      Font.Height = -21
+      Font.Name = 'Segoe UI Semilight'
+      Font.Style = []
+      GlowSize = 10
+      ParentColor = False
+      ParentFont = False
+      Layout = tlCenter
+      Visible = False
+      ExplicitHeight = 50
+    end
   end
   object pnlViews: TPanel
     AlignWithMargins = True
-    Left = 218
-    Top = 83
-    Width = 534
-    Height = 494
+    Left = 215
+    Top = 80
+    Width = 540
+    Height = 500
     Align = alClient
     BevelOuter = bvNone
     Color = 16118507
     ParentBackground = False
     TabOrder = 2
+    OnEnter = pnlViewsEnter
+    OnMouseEnter = pnlViewsEnter
   end
 end

@@ -1,7 +1,7 @@
 unit Model.Pedido;
 
 interface
-Uses Model.Pedido.Item, System.Classes, System.Generics.Collections;
+Uses Model.Pedido.Item, Model.DataModule, Data.DB, System.Classes, System.Generics.Collections;
 
   Type TPedido = Class
   private
@@ -9,7 +9,7 @@ Uses Model.Pedido.Item, System.Classes, System.Generics.Collections;
     FNumero: Integer;
     FIDPedido: Integer;
     FData: TDateTime;
-    ItensPedido : TObjectList<TPedidoItem>;
+    LItensPedido : TObjectList<TPedidoItem>;
     procedure SetData(const Value: TDateTime);
     procedure SetIDPedido(const Value: Integer);
     procedure SetNomeCliente(const Value: String);
@@ -22,30 +22,67 @@ Uses Model.Pedido.Item, System.Classes, System.Generics.Collections;
     Property NomeCliente : String read FNomeCliente write SetNomeCliente;
 
   Public
-    Procedure addItensPedido(AItemPedido : TPedidoItem);
+    Procedure SalvarPedido;
+    Procedure SalvarItemPedido;
     Constructor Create;
     Destructor Destroy; Override;
 
   End;
 
 implementation
+uses
+  System.SysUtils, Dialogs;
 
 { TPedido }
 
-procedure TPedido.addItensPedido(AItemPedido: TPedidoItem);
-begin
-
-end;
-
 constructor TPedido.Create;
 begin
+  LItensPedido := TObjectList<TPedidoItem>.Create;
+end;
+
+procedure TPedido.SalvarPedido;
+begin
+  With DataBase.Query do
+    Try
+      ExecSQL(
+        'update or insert into PEDIDOCAB (ID_PEDIDO_CAB, DT_EMISSAO, NUMERO, CLIENTE)'+
+        'VALUES (:ID_PEDIDO_CAB, :DT_EMISSAO, :NUMERO, :CLIENTE) matching (ID_PEDIDO_CAB)',
+          FIDPedido,
+          FormatDateTime('dd.mm.yyyy',FData),
+          FNumero,
+          FNomeCliente
+      );
+
+    Except on E:Exception do
+      ShowMessage('Ao Salvar no objeto :' + E.Message);
+    End;
 
 end;
 
-destructor TPedido.Destroy;
+procedure TPedido.SalvarItemPedido;
+Var
+  I : Integer;
+  ObjItemPedido : TPedidoItem;
 begin
+  With DataBase.Query do
+    Try
+      for ObjItemPedido in LItensPedido do
+        ExecSQL(
+          'update or insert into PEDIDOITEM (ID_PEDIDO_ITEM, ID_PEDIDO_CAB, ID_ITEM, QUANTIDADE, VALOR_UNITARIO, VALOR_TOTAL) '+
+          'values (:ID_PEDIDO_ITEM, :ID_PEDIDO_CAB, :ID_ITEM, :QUANTIDADE, :VALOR_UNITARIO, :VALOR_TOTAL) '+
+          'matching (ID_PEDIDO_ITEM)',
+            LItensPedido.IndexOf(ObjItemPedido), //ID_PEDIDO_ITEM
+            FIdPedido, //ID_PEDIDO_CAB
+            ObjItemPedido.Item.ID, //ID_ITEM
+            ObjItemPedido.Quantidade, //QUANTIDADE
+            ObjItemPedido.ValUnitario, //VALOR_UNITARIO
+            ObjItemPedido.ValTotal //VALOR_TOTAL
+        );
 
-  inherited;
+    Except on E:Exception do
+      ShowMessage('Ao Salvar Itens :' + E.Message);
+    End;
+
 end;
 
 procedure TPedido.SetData(const Value: TDateTime);
@@ -66,6 +103,12 @@ end;
 procedure TPedido.SetNumero(const Value: Integer);
 begin
   FNumero := Value;
+end;
+
+destructor TPedido.Destroy;
+begin
+  LItensPedido.Free;
+  inherited;
 end;
 
 end.

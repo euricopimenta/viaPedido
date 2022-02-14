@@ -14,7 +14,6 @@ type
   TDataBase = class(TDataModule)
     FDConnection1: TFDConnection;
     qryItem: TFDQuery;
-    dtsItem: TDataSource;
     qryPedido: TFDQuery;
     dtsPedido: TDataSource;
     qryPedidoItem: TFDQuery;
@@ -23,12 +22,15 @@ type
     qryPedidoDT_EMISSAO: TDateField;
     qryPedidoNUMERO: TIntegerField;
     qryPedidoCLIENTE: TStringField;
-    qryPedidoItemID_PEDIDO_ITEM: TIntegerField;
-    qryPedidoItemID_PEDIDO_CAB: TIntegerField;
-    qryPedidoItemID_ITEM: TIntegerField;
-    qryPedidoItemQUANTIDADE: TFloatField;
-    qryPedidoItemVALOR_UNITARIO: TFloatField;
-    qryPedidoItemVALOR_TOTAL: TFloatField;
+    dtsItem: TDataSource;
+    Query: TFDQuery;
+    qryItemID_ITEM: TIntegerField;
+    qryItemDESC_ITEM: TStringField;
+    qryPedidoItemCódigo: TIntegerField;
+    qryPedidoItemDescrição: TStringField;
+    qryPedidoItemQuant: TFloatField;
+    qryPedidoItemValor: TFloatField;
+    qryPedidoItemTotal: TFloatField;
   private
     { Private declarations }
   public
