@@ -23,7 +23,8 @@ Uses Model.Pedido.Item, Model.DataModule, Data.DB, System.Classes, System.Generi
 
   Public
     Procedure SalvarPedido;
-    Procedure SalvarItemPedido;
+    Procedure addItemPedido (AItem : TPedidoItem);
+    Function CountItemPedido : Integer;
     Constructor Create;
     Destructor Destroy; Override;
 
@@ -31,9 +32,10 @@ Uses Model.Pedido.Item, Model.DataModule, Data.DB, System.Classes, System.Generi
 
 implementation
 uses
-  System.SysUtils, Dialogs;
+  System.SysUtils;
 
 { TPedido }
+
 
 constructor TPedido.Create;
 begin
@@ -42,47 +44,54 @@ end;
 
 procedure TPedido.SalvarPedido;
 begin
-  With DataBase.Query do
+  With DataBase.qryPedido do
     Try
       ExecSQL(
         'update or insert into PEDIDOCAB (ID_PEDIDO_CAB, DT_EMISSAO, NUMERO, CLIENTE)'+
         'VALUES (:ID_PEDIDO_CAB, :DT_EMISSAO, :NUMERO, :CLIENTE) matching (ID_PEDIDO_CAB)',
-          FIDPedido,
-          FormatDateTime('dd.mm.yyyy',FData),
-          FNumero,
-          FNomeCliente
+          [IDPedido,
+          FormatDateTime('dd.mm.yyyy',Self.Data),
+          Numero,
+          NomeCliente]
       );
 
-    Except on E:Exception do
-      ShowMessage('Ao Salvar no objeto :' + E.Message);
+    Except
+      raise Exception.Create('Erro ao gravar pedido');
     End;
 
 end;
 
-procedure TPedido.SalvarItemPedido;
-Var
-  I : Integer;
-  ObjItemPedido : TPedidoItem;
+procedure TPedido.addItemPedido(AItem: TPedidoItem);
 begin
-  With DataBase.Query do
-    Try
-      for ObjItemPedido in LItensPedido do
-        ExecSQL(
-          'update or insert into PEDIDOITEM (ID_PEDIDO_ITEM, ID_PEDIDO_CAB, ID_ITEM, QUANTIDADE, VALOR_UNITARIO, VALOR_TOTAL) '+
-          'values (:ID_PEDIDO_ITEM, :ID_PEDIDO_CAB, :ID_ITEM, :QUANTIDADE, :VALOR_UNITARIO, :VALOR_TOTAL) '+
-          'matching (ID_PEDIDO_ITEM)',
-            LItensPedido.IndexOf(ObjItemPedido), //ID_PEDIDO_ITEM
-            FIdPedido, //ID_PEDIDO_CAB
-            ObjItemPedido.Item.ID, //ID_ITEM
-            ObjItemPedido.Quantidade, //QUANTIDADE
-            ObjItemPedido.ValUnitario, //VALOR_UNITARIO
-            ObjItemPedido.ValTotal //VALOR_TOTAL
-        );
+  Try
+    DataBase.qryPedidoItem.ExecSQL(
+      'update or insert into PEDIDOITEM (ID_PEDIDO_CAB, ID_ITEM, QUANTIDADE, VALOR_UNITARIO, VALOR_TOTAL) '+
+      'values (:ID_PEDIDO_CAB, :ID_ITEM, :QUANTIDADE, :VALOR_UNITARIO, :VALOR_TOTAL) matching (ID_ITEM,ID_PEDIDO_CAB) ',
+        [Self.IDPedido, //ID_PEDIDO_CAB
+        AItem.IDItem, //ID_ITEM
+        AItem.Quantidade, //QUANTIDADE
+        AItem.ValUnitario, //VALOR_UNITARIO
+        AItem.ValTotal] //VALOR_TOTAL
+    );
+  Except
+    raise Exception.Create('Erro ao salvar Item');
+  End;
 
-    Except on E:Exception do
-      ShowMessage('Ao Salvar Itens :' + E.Message);
+  Try
+    With DataBase.qryPedidoItem Do
+    Begin
+      ExecSQL(SQL.Text,[IDPedido]);
+      Active := True;
     End;
+  Except
+    raise Exception.Create('Erro ao atualizar Grid');
+  End;
 
+end;
+
+function TPedido.CountItemPedido: Integer;
+begin
+  Result := LItensPedido.Count;
 end;
 
 procedure TPedido.SetData(const Value: TDateTime);
@@ -97,7 +106,10 @@ end;
 
 procedure TPedido.SetNomeCliente(const Value: String);
 begin
+  if Value = EmptyStr then
+    raise Exception.Create('O Nome do Cliente precisa ser preenchido');
   FNomeCliente := Value;
+
 end;
 
 procedure TPedido.SetNumero(const Value: Integer);

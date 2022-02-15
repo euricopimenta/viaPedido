@@ -6,55 +6,44 @@ Uses
 
   Type TPedidoController = Class
   private
-    objPedido : TPedido;
     FdtsPedido: TDataSource;
     procedure SetdtsPedido(const Value: TDataSource);
-    procedure salvarItem;
 
   published
     Property dtsPedido : TDataSource read FdtsPedido write SetdtsPedido;
     Function getNovoCod : String;
     Function getNomeItem(ACod : String) : String;
-    Procedure criarPedido(APedido:TPedido);
-    Procedure addItemPedido(AItemPedido:TPedidoItem);
+    Procedure delItemPedido(ACod : String);
     Constructor Create;
     destructor Destroy ; Override;
   End;
 
-
 implementation
 
 uses
-  System.SysUtils;
-
+  System.SysUtils,Dialogs;
 { TPedidoController }
 
-procedure TPedidoController.addItemPedido(AItemPedido:TPedidoItem);
-Begin
-     //
-end;
+
 
 constructor TPedidoController.Create;
 begin
   SetdtsPedido(DataBase.dtsPedidoItem);
   DataBase.qryPedidoItem.Active := True;
+
 end;
 
-procedure TPedidoController.criarPedido(APedido:TPedido);
+procedure TPedidoController.delItemPedido(ACod: String);
 begin
+  if MessageDlg('Remover Item ?',mtWarning,mbYesNo,1) = 6 then
+    DataBase.qryPedidoItem.Delete;
 
 end;
 
 function TPedidoController.getNomeItem(ACod: String): String;
-
 begin
-
-    With DataBase.Query do
-    Begin
-      Open('Select DESC_ITEM as NOME from item where id_item = '+ ACod);
-      Result := FieldValues['NOME'];
-
-    End;
+  DataBase.Query.Open('Select DESC_ITEM as NOME from item where id_item = :COD',[ACod.ToInteger]);
+  Result := DataBase.Query.FieldValues['NOME'];
 
 end;
 
@@ -64,27 +53,8 @@ begin
   Begin
     Open('Select Coalesce(MAX(ID_PEDIDO_CAB),0)+1 ID FROM PEDIDOCAB');
     Result := IntToStr(FieldValues['ID']);
-
   End;
 
-end;
-
-procedure TPedidoController.salvarItem;
-begin
-//  With objPedido do
-//  Try
-//    With DataBase.qryItem do
-//    Begin
-//
-//      if isAlterar then Edit Else Insert;
-//
-//      FieldByName('ID_ITEM').AsInteger := objItem.ID;
-//      FieldByName('DESC_ITEM').AsString := objItem.Descricao;
-//      Refresh;
-//    End;
-//  Finally
-//
-//  End;
 end;
 
 procedure TPedidoController.SetdtsPedido(const Value: TDataSource);
@@ -94,8 +64,8 @@ end;
 
 destructor TPedidoController.Destroy;
 begin
-  objPedido.Free;
   DataBase.qryPedidoItem.Active := False;
+
   inherited;
 end;
 

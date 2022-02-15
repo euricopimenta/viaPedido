@@ -41,7 +41,6 @@
     end
   end
   object qryPedido: TFDQuery
-    Active = True
     Connection = FDConnection1
     SQL.Strings = (
       'select * from pedidocab')
@@ -83,7 +82,7 @@
       '    p.valor_total "Total"'
       'from pedidoitem p'
       'Left outer join item i on i.id_item = p.id_pedido_item'
-      'where p.id_pedido_cab = :IDPEDIDO')
+      'where p.id_pedido_cab = :IDPedido')
     Left = 64
     Top = 240
     ParamData = <

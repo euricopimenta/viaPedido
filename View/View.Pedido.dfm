@@ -300,7 +300,7 @@ object frm_Pedido: Tfrm_Pedido
         ParentFont = False
         TabOrder = 0
         TextHint = 'Cod Item'
-        OnExit = edtDescricaoItemEnter
+        OnKeyPress = edtCodItemKeyPress
       end
       object edtDescricaoItem: TEdit
         Left = 139
@@ -344,7 +344,6 @@ object frm_Pedido: Tfrm_Pedido
         ParentFont = False
         TabOrder = 2
         TextHint = 'Quant.'
-        ExplicitLeft = 355
       end
       object edtValor: TEdit
         Left = 482
@@ -366,7 +365,7 @@ object frm_Pedido: Tfrm_Pedido
         ParentFont = False
         TabOrder = 3
         TextHint = 'Valor'
-        ExplicitLeft = 488
+        OnExit = edtValorExit
       end
       object edtValorTotal: TEdit
         Left = 615
@@ -1492,7 +1491,7 @@ object frm_Pedido: Tfrm_Pedido
       end
       object btnAdd: TSpeedButton
         AlignWithMargins = True
-        Left = 4
+        Left = 5
         Top = 7
         Width = 50
         Height = 50
@@ -1824,6 +1823,7 @@ object frm_Pedido: Tfrm_Pedido
           0000000000000000000000000000000000000000000000000000000000000000
           00000000000000000000}
         ParentFont = False
+        OnClick = btnAddClick
       end
       object btnRemoverItem: TSpeedButton
         AlignWithMargins = True

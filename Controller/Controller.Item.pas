@@ -45,12 +45,17 @@ begin
 end;
 
 procedure TItemController.ApagarItem;
+Var
+  Opc : Integer;
 begin
-  With DataBase.qryItem do
-  Begin
-    ExecSQL('Select Coalesce(MAX(ID_ITEM),0)+1 ID FROM ITEM');
-    Refresh;
-  End;
+  Opc := MessageDlg('Confirma remoção do Item ?',mtConfirmation,mbYesNo,1);
+
+  if Opc = 6 then
+    With DataBase.qryItem do
+    Begin
+      Delete;
+      Refresh;
+    End;
 
 end;
 

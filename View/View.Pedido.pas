@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
   Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.WinXCalendars, Vcl.WinXCtrls, Vcl.ComCtrls,
   Vcl.Buttons, Controller.Pedido;
-
+  
 type
   Tfrm_Pedido = class(TForm)
     pnlHeader: TPanel;
@@ -36,11 +36,15 @@ type
     procedure FormCreate(Sender: TObject);
     procedure edtDescricaoItemEnter(Sender: TObject);
     procedure btnNovoPedidoClick(Sender: TObject);
+    procedure edtCodItemKeyPress(Sender: TObject; var Key: Char);
+    procedure btnAddClick(Sender: TObject);
+    procedure edtValorExit(Sender: TObject);
   private
     { Private declarations }
     Procedure Reiniciar;
-  public
+  public    
     { Public declarations }
+    Procedure mostrarControles(State : Boolean);
   end;
 
 var
@@ -49,24 +53,11 @@ var
 implementation
 Uses 
   Model.Pedido.Item, Model.Pedido;
-  
+
+Var
+  objPedido : TPedido;
+   
 {$R *.dfm}
-
-
-procedure Tfrm_Pedido.edtDescricaoItemEnter(Sender: TObject);
-begin
-  if edtNumero.Text = EmptyStr then
-    raise Exception.Create('Preencha o campo : Número');
-
-  try
-    edtDescricaoItem.Text := Controller.getNomeItem(edtNumero.Text);  
-  except on E: Exception do
-    ShowMessage('Item não encontrado'); 
-    
-  end; 
-
-
-end;
 
 procedure Tfrm_Pedido.FormCreate(Sender: TObject);
 begin
@@ -76,16 +67,77 @@ begin
 
 end;
 
-procedure Tfrm_Pedido.Reiniciar;
+procedure Tfrm_Pedido.mostrarControles(State : Boolean);
 begin
-  dateEdtPedido.Date := Now;
-  edtNumero.Text := Controller.getNovoCod;
+  pnlClient.Visible := State;
+  pnlItens.Visible := State;
+  btnSalvar.Visible := State;
+  btnRemoverPedido.Visible := State;
 
 end;
 
-procedure Tfrm_Pedido.btnNovoPedidoClick(Sender: TObject);
+procedure Tfrm_Pedido.edtCodItemKeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key = #10 then
+    edtDescricaoItemEnter(Self);
+  
+end;
+
+procedure Tfrm_Pedido.edtDescricaoItemEnter(Sender: TObject);
+begin
+  if StrToInt(edtCodItem.Text) > 0 then
+  try
+    edtDescricaoItem.Text := Controller.getNomeItem(edtCodItem.Text);  
+  except
+    ShowMessage('Item não encontrado'); 
+    
+  end; 
+
+end;
+
+procedure Tfrm_Pedido.edtValorExit(Sender: TObject);
 Var
-  objPedido : TPedido;
+  Total : Currency;
+begin  
+  Total := StrToFloat(edtQuantidade.Text) * StrToFloat(edtValor.Text);   
+  edtValorTotal.Text := CurrToStrF(Total,ffNumber,2);
+   
+end;
+
+procedure Tfrm_Pedido.Reiniciar;
+begin   
+  dateEdtPedido.Date := Now;
+  edtNumero.Text := Controller.getNovoCod;
+  edtCliente.Clear;
+  btnNovoPedido.Enabled := True;
+  mostrarControles(False);
+
+end;
+
+procedure Tfrm_Pedido.btnAddClick(Sender: TObject);
+Var
+  objItemPedido : TPedidoItem;
+begin
+  objItemPedido := TPedidoItem.Create;
+  try
+    with objItemPedido do
+    Begin
+      IDPedidoItem := objPedido.CountItemPedido;
+      IDItem := StrToint(edtCodItem.Text);
+      Quantidade := StrToFloat(edtQuantidade.Text);
+      ValUnitario := StrToFloat(edtValor.Text);
+      ValTotal := StrToFloat(edtValorTotal.Text);
+      
+    End;
+    objPedido.addItemPedido(objItemPedido);
+    
+  finally    
+    objItemPedido.Free;
+  end;
+ 
+end;
+
+procedure Tfrm_Pedido.btnNovoPedidoClick(Sender: TObject);
 begin
   objPedido := TPedido.Create;
   Try
@@ -93,20 +145,27 @@ begin
     Begin 
       IDPedido := Controller.getNovoCod.ToInteger;
       NomeCliente := edtCliente.Text;
-      Numero := StrToInt(edtNumero.Text);      
-    End;                                     
+      Numero := StrToInt(edtNumero.Text);
+      SalvarPedido;
+    End;
   Finally
-    
-  End;
+
+  End;  
+  
+  mostrarControles(True);
+  btnNovoPedido.Enabled := False;  
   
 end;
 
 procedure Tfrm_Pedido.btnVoltarClick(Sender: TObject);
 begin
-  Parent.SetFocus;
-  Free;
+  if btnNovoPedido.Enabled = False then
+    Reiniciar
+  Else 
+  Begin 
+    Parent.SetFocus;
+    FreeAndNil(Self);
+  End;
 end;
-
-
 
 end.

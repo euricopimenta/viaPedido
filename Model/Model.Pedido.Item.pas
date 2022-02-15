@@ -9,30 +9,33 @@ Uses Model.Item;
     FValUnitario: Double;
     FQuantidade: Double;
     FValTotal: Double;
+    FIDItem: Integer;
     procedure SetIDPedidoItem(const Value: Integer);
     procedure SetQuantidade(const Value: Double);
     procedure SetValTotal(const Value: Double);
     procedure SetValUnitario(const Value: Double);
+    procedure SetIDItem(const Value: Integer);
   published
-    Item : TItem;
     Property IDPedidoItem : Integer read FIDPedidoItem write SetIDPedidoItem;
+    Property IDItem : Integer read FIDItem write SetIDItem;
     Property Quantidade : Double read FQuantidade write SetQuantidade;
     Property ValUnitario : Double read FValUnitario write SetValUnitario;
     Property ValTotal : Double read FValTotal write SetValTotal;
-  Public
-    Constructor Create ;
-    Destructor Destroy ; Override;
 
   End;
 
 implementation
+uses
+  System.SysUtils;
 
 { TPedidoItem }
 
 
-constructor TPedidoItem.Create;
+procedure TPedidoItem.SetIDItem(const Value: Integer);
 begin
-  Item := TItem.Create;
+  if Value < 1 then
+    raise Exception.Create('Insira um código para o item');
+  FIDItem := Value;
 end;
 
 procedure TPedidoItem.SetIDPedidoItem(const Value: Integer);
@@ -42,6 +45,8 @@ end;
 
 procedure TPedidoItem.SetQuantidade(const Value: Double);
 begin
+  if Value <= 0 then
+    raise Exception.Create('Insira a quantidade');
   FQuantidade := Value;
 end;
 
@@ -52,13 +57,10 @@ end;
 
 procedure TPedidoItem.SetValUnitario(const Value: Double);
 begin
+  if Value <= 0 then
+    raise Exception.Create('Insira o Valor unitário');
   FValUnitario := Value;
 end;
 
-destructor TPedidoItem.Destroy;
-begin
-  Item.Free;
-  inherited;
-end;
 
 end.
