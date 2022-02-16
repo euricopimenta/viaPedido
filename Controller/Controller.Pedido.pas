@@ -2,18 +2,22 @@ unit Controller.Pedido;
 
 interface
 Uses
-  Model.Pedido, Model.Pedido.Item, Model.DataModule, Data.DB;
+  Model.Pedido, Model.Pedido.Item, Model.DataModule, Data.DB, Vcl.Forms,
+  View.Pedido.Pesquisa;
 
   Type TPedidoController = Class
   private
     FdtsPedido: TDataSource;
     procedure SetdtsPedido(const Value: TDataSource);
+    Function SetDtsPesquisaPedido : TDataSource;
 
   published
     Property dtsPedido : TDataSource read FdtsPedido write SetdtsPedido;
     Function getNovoCod : String;
     Function getNomeItem(ACod : String) : String;
     Procedure delItemPedido(ACod : String);
+    Function BuscarPedidos(Sender:TForm): TPedido;
+    Function CalculaTotalItem (AQuant,AValor : String) : String;
     Constructor Create;
     destructor Destroy ; Override;
   End;
@@ -25,6 +29,28 @@ uses
 { TPedidoController }
 
 
+
+function TPedidoController.CalculaTotalItem(AQuant, AValor: String): String;
+Var
+  iQuant,iValor : Currency;
+begin
+  If TryStrToCurr(AQuant,iQuant) then
+    If TryStrToCurr(AValor,iValor) then
+      Result := CurrToStrF(iQuant * iValor,ffNumber,2) //Retorna Total calculado
+    Else
+      raise Exception.Create('Valor Inválido')
+  Else
+   raise Exception.Create('Quantidade Inválida')
+
+end;
+
+Function TPedidoController.BuscarPedidos(Sender:TForm) : TPedido;
+begin
+  Application.CreateForm(Tfrm_Pesquisa,frm_Pesquisa);
+  frm_Pesquisa.Parent := Sender.Parent;
+  frm_Pesquisa.Show;
+
+end;
 
 constructor TPedidoController.Create;
 begin

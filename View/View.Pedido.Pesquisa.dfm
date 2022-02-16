@@ -1,30 +1,33 @@
 object frm_Pesquisa: Tfrm_Pesquisa
   Left = 0
   Top = 0
+  Align = alClient
+  AlphaBlend = True
+  AlphaBlendValue = 240
   BorderStyle = bsNone
   Caption = 'frm_Pesquisa'
   ClientHeight = 588
   ClientWidth = 925
-  Color = clBtnFace
+  Color = clBlack
   Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
   Font.Height = -16
   Font.Name = 'Segoe UI'
   Font.Style = []
-  Padding.Left = 25
+  Padding.Left = 75
   Padding.Top = 50
-  Padding.Right = 25
-  Padding.Bottom = 50
+  Padding.Right = 75
+  Padding.Bottom = 75
   OldCreateOrder = False
   Position = poMainFormCenter
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 21
-  object pnlItens: TPanel
-    Left = 25
+  object pnlMain: TPanel
+    Left = 75
     Top = 50
-    Width = 875
-    Height = 488
+    Width = 775
+    Height = 463
     Align = alClient
     Anchors = [akRight, akBottom]
     BevelOuter = bvNone
@@ -40,28 +43,29 @@ object frm_Pesquisa: Tfrm_Pesquisa
     ParentDoubleBuffered = False
     TabOrder = 0
     StyleElements = []
-    ExplicitWidth = 767
-    ExplicitHeight = 457
+    ExplicitLeft = 25
+    ExplicitWidth = 875
+    ExplicitHeight = 488
     object pnlGrid: TPanel
       AlignWithMargins = True
       Left = 3
       Top = 68
-      Width = 869
-      Height = 417
+      Width = 769
+      Height = 392
       Align = alClient
       BevelOuter = bvNone
       Caption = 'Panel2'
       Color = clWhite
       ParentBackground = False
       TabOrder = 0
-      ExplicitWidth = 637
-      ExplicitHeight = 390
+      ExplicitWidth = 869
+      ExplicitHeight = 417
       object dbgPedidos: TDBGrid
         AlignWithMargins = True
         Left = 5
         Top = 47
-        Width = 859
-        Height = 365
+        Width = 759
+        Height = 340
         Margins.Left = 5
         Margins.Top = 5
         Margins.Right = 5
@@ -82,7 +86,7 @@ object frm_Pesquisa: Tfrm_Pesquisa
         AlignWithMargins = True
         Left = 3
         Top = 5
-        Width = 863
+        Width = 763
         Height = 32
         Margins.Top = 5
         Margins.Bottom = 5
@@ -93,9 +97,9 @@ object frm_Pesquisa: Tfrm_Pesquisa
         Color = clWhite
         ParentBackground = False
         TabOrder = 1
-        ExplicitTop = 3
+        ExplicitWidth = 863
         DesignSize = (
-          863
+          763
           32)
         object edtPesqItem: TEdit
           Left = 209
@@ -121,7 +125,7 @@ object frm_Pesquisa: Tfrm_Pesquisa
         object edtPesqCliente: TEdit
           Left = 570
           Top = 0
-          Width = 291
+          Width = 191
           Height = 32
           Alignment = taCenter
           Anchors = [akLeft, akTop, akRight]
@@ -139,6 +143,7 @@ object frm_Pesquisa: Tfrm_Pesquisa
           TabOrder = 1
           Text = 'Por Cliente'
           TextHint = 'Por Cliente'
+          ExplicitWidth = 291
         end
         object datePesqData: TCalendarPicker
           Left = 25
@@ -200,22 +205,22 @@ object frm_Pesquisa: Tfrm_Pesquisa
     object pnlHeader: TPanel
       Left = 0
       Top = 0
-      Width = 875
+      Width = 775
       Height = 65
       Align = alTop
       BevelOuter = bvNone
       ParentBackground = False
       ParentColor = True
       TabOrder = 1
-      ExplicitWidth = 709
+      ExplicitWidth = 875
       DesignSize = (
-        875
+        775
         65)
       object Shape2: TShape
         AlignWithMargins = True
         Left = 3
         Top = 3
-        Width = 869
+        Width = 769
         Height = 59
         Align = alClient
         Brush.Color = 4208934
@@ -563,7 +568,7 @@ object frm_Pesquisa: Tfrm_Pesquisa
       end
       object btnPesquisar: TSpeedButton
         AlignWithMargins = True
-        Left = 707
+        Left = 607
         Top = 7
         Width = 147
         Height = 50
@@ -896,6 +901,7 @@ object frm_Pesquisa: Tfrm_Pesquisa
           00000000000000000000}
         Layout = blGlyphRight
         ParentFont = False
+        ExplicitLeft = 707
       end
     end
   end

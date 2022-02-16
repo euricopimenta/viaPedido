@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
   Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.WinXCalendars, Vcl.WinXCtrls, Vcl.ComCtrls,
   Vcl.Buttons, Controller.Pedido;
-  
+
 type
   Tfrm_Pedido = class(TForm)
     pnlHeader: TPanel;
@@ -32,17 +32,21 @@ type
     edtValor: TEdit;
     edtValorTotal: TEdit;
     btnNovoPedido: TSpeedButton;
+    btnBuscarPedidos: TSpeedButton;
     procedure btnVoltarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure edtDescricaoItemEnter(Sender: TObject);
     procedure btnNovoPedidoClick(Sender: TObject);
     procedure edtCodItemKeyPress(Sender: TObject; var Key: Char);
     procedure btnAddClick(Sender: TObject);
     procedure edtValorExit(Sender: TObject);
+    procedure edtNumeroExit(Sender: TObject);
+    procedure edtCodItemExit(Sender: TObject);
+    procedure btnBuscarPedidosClick(Sender: TObject);
   private
     { Private declarations }
     Procedure Reiniciar;
-  public    
+    Procedure resetPnlItens;
+  public
     { Public declarations }
     Procedure mostrarControles(State : Boolean);
   end;
@@ -76,32 +80,35 @@ begin
 
 end;
 
-procedure Tfrm_Pedido.edtCodItemKeyPress(Sender: TObject; var Key: Char);
+procedure Tfrm_Pedido.edtCodItemExit(Sender: TObject);
+var
+  Ret : Integer;
 begin
-  if Key = #10 then
-    edtDescricaoItemEnter(Self);
-  
+  if TryStrToInt(edtCodItem.Text,Ret) then
+    try
+      edtDescricaoItem.Text := Controller.getNomeItem(edtCodItem.Text);
+      Next;
+    except
+      ShowMessage('Item não encontrado');
+      resetPnlItens;
+    end
+  Else
+    Exit
+
 end;
 
-procedure Tfrm_Pedido.edtDescricaoItemEnter(Sender: TObject);
+procedure Tfrm_Pedido.edtCodItemKeyPress(Sender: TObject; var Key: Char);
 begin
-  if StrToInt(edtCodItem.Text) > 0 then
-  try
-    edtDescricaoItem.Text := Controller.getNomeItem(edtCodItem.Text);  
-  except
-    ShowMessage('Item não encontrado'); 
-    
-  end; 
-
+  if Key = #$D then
+    Next
 end;
 
 procedure Tfrm_Pedido.edtValorExit(Sender: TObject);
-Var
-  Total : Currency;
-begin  
-  Total := StrToFloat(edtQuantidade.Text) * StrToFloat(edtValor.Text);   
-  edtValorTotal.Text := CurrToStrF(Total,ffNumber,2);
-   
+begin
+  edtValorTotal.Text := Controller.CalculaTotalItem(edtQuantidade.Text, edtValor.Text);
+  btnAddClick(Self);
+  resetPnlItens;
+
 end;
 
 procedure Tfrm_Pedido.Reiniciar;
@@ -124,17 +131,21 @@ begin
     Begin
       IDPedidoItem := objPedido.CountItemPedido;
       IDItem := StrToint(edtCodItem.Text);
-      Quantidade := StrToFloat(edtQuantidade.Text);
-      ValUnitario := StrToFloat(edtValor.Text);
-      ValTotal := StrToFloat(edtValorTotal.Text);
-      
+      Quantidade := StrToCurr(edtQuantidade.Text);
+      ValUnitario := StrToCurr(edtValor.Text);
+      ValTotal := StrToCurr(edtValorTotal.Text);
+
     End;
-    objPedido.addItemPedido(objItemPedido);
-    
-  finally    
+    objPedido.addItemPedido(objItemPedido);   //Adiciona Item
+  finally
     objItemPedido.Free;
   end;
  
+end;
+
+procedure Tfrm_Pedido.btnBuscarPedidosClick(Sender: TObject);
+begin
+  Controller.BuscarPedidos;
 end;
 
 procedure Tfrm_Pedido.btnNovoPedidoClick(Sender: TObject);
@@ -144,6 +155,7 @@ begin
     With objPedido do
     Begin 
       IDPedido := Controller.getNovoCod.ToInteger;
+      Data := dateEdtPedido.Date;
       NomeCliente := edtCliente.Text;
       Numero := StrToInt(edtNumero.Text);
       SalvarPedido;
@@ -151,21 +163,34 @@ begin
   Finally
 
   End;  
-  
+  //Prepara a tela para receber os Itens.
   mostrarControles(True);
-  btnNovoPedido.Enabled := False;  
+  btnNovoPedido.Enabled := False;
+  edtCodItem.SetFocus;
   
 end;
 
 procedure Tfrm_Pedido.btnVoltarClick(Sender: TObject);
 begin
   if btnNovoPedido.Enabled = False then
-    Reiniciar
+    Reiniciar //Limpa a rotina, para continuar lançando;
   Else 
-  Begin 
+  Begin
     Parent.SetFocus;
     FreeAndNil(Self);
   End;
+end;
+
+procedure Tfrm_Pedido.resetPnlItens;
+Var
+  I : Integer;
+begin
+  With pnlItens do
+    for I := 0 to pnlItens.ControlCount-1 do
+      if Controls[i] is TEdit then
+        TEdit(Controls[i]).Clear;
+
+  edtCodItem.SetFocus;
 end;
 
 end.

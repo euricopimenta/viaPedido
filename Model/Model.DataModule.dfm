@@ -81,16 +81,14 @@
       '    p.valor_unitario "Valor",'
       '    p.valor_total "Total"'
       'from pedidoitem p'
-      'Left outer join item i on i.id_item = p.id_pedido_item'
+      'Left outer join item i on i.id_item = p.id_item'
       'where p.id_pedido_cab = :IDPedido')
     Left = 64
     Top = 240
     ParamData = <
       item
         Name = 'IDPEDIDO'
-        DataType = ftInteger
         ParamType = ptInput
-        Value = Null
       end>
     object qryPedidoItemCódigo: TIntegerField
       FieldName = 'C'#243'digo'
@@ -112,10 +110,12 @@
     object qryPedidoItemValor: TFloatField
       FieldName = 'Valor'
       Origin = 'VALOR_UNITARIO'
+      currency = True
     end
     object qryPedidoItemTotal: TFloatField
       FieldName = 'Total'
       Origin = 'VALOR_TOTAL'
+      currency = True
     end
   end
   object dtsPedidoItem: TDataSource

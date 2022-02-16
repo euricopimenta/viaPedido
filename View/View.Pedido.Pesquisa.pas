@@ -9,7 +9,7 @@ uses
 
 type
   Tfrm_Pesquisa = class(TForm)
-    pnlItens: TPanel;
+    pnlMain: TPanel;
     pnlGrid: TPanel;
     dbgPedidos: TDBGrid;
     pnlEdits: TPanel;
@@ -66,12 +66,6 @@ begin
   ativaEditPesquisa(chkPesqItem,edtPesqItem);
 end;
 
-
-
-
-
-
-
 procedure Tfrm_Pesquisa.ativaEditPesquisa(ACheck: TCheckBox; AEdit: TEdit);
 begin
   With AEdit Do
@@ -93,11 +87,8 @@ end;
 
 procedure Tfrm_Pesquisa.btnSairClick(Sender: TObject);
 begin
-  Parent.SetFocus;
-  Free;
+  Close;
+  FreeAndNil(Self);
 end;
-
-
-
 
 end.

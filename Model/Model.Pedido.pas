@@ -50,13 +50,12 @@ begin
         'update or insert into PEDIDOCAB (ID_PEDIDO_CAB, DT_EMISSAO, NUMERO, CLIENTE)'+
         'VALUES (:ID_PEDIDO_CAB, :DT_EMISSAO, :NUMERO, :CLIENTE) matching (ID_PEDIDO_CAB)',
           [IDPedido,
-          FormatDateTime('dd.mm.yyyy',Self.Data),
+          Self.FData,
           Numero,
           NomeCliente]
       );
-
     Except
-      raise Exception.Create('Erro ao gravar pedido');
+      raise Exception.Create('Erro ao Salvar Pedido');
     End;
 
 end;
@@ -64,7 +63,7 @@ end;
 procedure TPedido.addItemPedido(AItem: TPedidoItem);
 begin
   Try
-    DataBase.qryPedidoItem.ExecSQL(
+    DataBase.Query.ExecSQL(
       'update or insert into PEDIDOITEM (ID_PEDIDO_CAB, ID_ITEM, QUANTIDADE, VALOR_UNITARIO, VALOR_TOTAL) '+
       'values (:ID_PEDIDO_CAB, :ID_ITEM, :QUANTIDADE, :VALOR_UNITARIO, :VALOR_TOTAL) matching (ID_ITEM,ID_PEDIDO_CAB) ',
         [Self.IDPedido, //ID_PEDIDO_CAB
@@ -73,6 +72,8 @@ begin
         AItem.ValUnitario, //VALOR_UNITARIO
         AItem.ValTotal] //VALOR_TOTAL
     );
+    DataBase.Query.Close;
+
   Except
     raise Exception.Create('Erro ao salvar Item');
   End;
@@ -80,11 +81,13 @@ begin
   Try
     With DataBase.qryPedidoItem Do
     Begin
-      ExecSQL(SQL.Text,[IDPedido]);
-      Active := True;
+      ParamByName('IDPedido').AsInteger := Self.IDPedido;
+
+      Refresh;
     End;
-  Except
-    raise Exception.Create('Erro ao atualizar Grid');
+  Except on E : Exception do
+    raise Exception.Create(E.Message);
+    //raise Exception.Create('Erro ao atualizar Grid');
   End;
 
 end;
