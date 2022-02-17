@@ -63,9 +63,9 @@ object frm_Pesquisa: Tfrm_Pesquisa
       object dbgPedidos: TDBGrid
         AlignWithMargins = True
         Left = 5
-        Top = 47
+        Top = 88
         Width = 759
-        Height = 340
+        Height = 299
         Margins.Left = 5
         Margins.Top = 5
         Margins.Right = 5
@@ -87,24 +87,36 @@ object frm_Pesquisa: Tfrm_Pesquisa
         Left = 3
         Top = 5
         Width = 763
-        Height = 32
+        Height = 73
         Margins.Top = 5
         Margins.Bottom = 5
         Align = alTop
-        AutoSize = True
         BevelOuter = bvNone
-        Caption = 'Panel1'
         Color = clWhite
         ParentBackground = False
         TabOrder = 1
-        ExplicitWidth = 863
+        ExplicitLeft = 0
         DesignSize = (
           763
-          32)
+          73)
+        object lblPeriodo: TLabel
+          Left = 217
+          Top = 8
+          Width = 23
+          Height = 21
+          Caption = 'At'#233
+        end
+        object Label1: TLabel
+          Left = 33
+          Top = 8
+          Width = 19
+          Height = 21
+          Caption = 'De'
+        end
         object edtPesqItem: TEdit
-          Left = 209
-          Top = 0
-          Width = 312
+          Left = 33
+          Top = 43
+          Width = 361
           Height = 32
           Alignment = taCenter
           BevelInner = bvNone
@@ -123,9 +135,9 @@ object frm_Pesquisa: Tfrm_Pesquisa
           TextHint = 'Por Item'
         end
         object edtPesqCliente: TEdit
-          Left = 570
-          Top = 0
-          Width = 191
+          Left = 440
+          Top = 43
+          Width = 321
           Height = 32
           Alignment = taCenter
           Anchors = [akLeft, akTop, akRight]
@@ -143,11 +155,10 @@ object frm_Pesquisa: Tfrm_Pesquisa
           TabOrder = 1
           Text = 'Por Cliente'
           TextHint = 'Por Cliente'
-          ExplicitWidth = 291
         end
-        object datePesqData: TCalendarPicker
-          Left = 25
-          Top = 0
+        object edtDataInicial: TCalendarPicker
+          Left = 62
+          Top = 5
           Height = 32
           CalendarHeaderInfo.DaysOfWeekFont.Charset = DEFAULT_CHARSET
           CalendarHeaderInfo.DaysOfWeekFont.Color = clWindowText
@@ -172,8 +183,8 @@ object frm_Pesquisa: Tfrm_Pesquisa
           TextHint = 'select a date'
         end
         object chkPesqCliente: TCheckBox
-          Left = 544
-          Top = 0
+          Left = 411
+          Top = 43
           Width = 20
           Height = 32
           Alignment = taLeftJustify
@@ -182,7 +193,7 @@ object frm_Pesquisa: Tfrm_Pesquisa
         end
         object chkPesqData: TCheckBox
           Left = 0
-          Top = 0
+          Top = 4
           Width = 20
           Height = 32
           Alignment = taLeftJustify
@@ -192,13 +203,39 @@ object frm_Pesquisa: Tfrm_Pesquisa
           OnClick = chkPesqDataClick
         end
         object chkPesqItem: TCheckBox
-          Left = 183
-          Top = 0
+          Left = 0
+          Top = 42
           Width = 20
           Height = 32
           Alignment = taLeftJustify
           TabOrder = 5
           OnClick = chkPesqItemClick
+        end
+        object edtDataFinal: TCalendarPicker
+          Left = 254
+          Top = 5
+          Height = 32
+          CalendarHeaderInfo.DaysOfWeekFont.Charset = DEFAULT_CHARSET
+          CalendarHeaderInfo.DaysOfWeekFont.Color = clWindowText
+          CalendarHeaderInfo.DaysOfWeekFont.Height = -13
+          CalendarHeaderInfo.DaysOfWeekFont.Name = 'Segoe UI'
+          CalendarHeaderInfo.DaysOfWeekFont.Style = []
+          CalendarHeaderInfo.Font.Charset = DEFAULT_CHARSET
+          CalendarHeaderInfo.Font.Color = clWindowText
+          CalendarHeaderInfo.Font.Height = -20
+          CalendarHeaderInfo.Font.Name = 'Segoe UI'
+          CalendarHeaderInfo.Font.Style = []
+          Color = clBtnFace
+          Date = 44600.000000000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clGray
+          Font.Height = -16
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          IsEmpty = False
+          ParentFont = False
+          TabOrder = 6
+          TextHint = 'select a date'
         end
       end
     end
@@ -901,7 +938,28 @@ object frm_Pesquisa: Tfrm_Pesquisa
           00000000000000000000}
         Layout = blGlyphRight
         ParentFont = False
+        OnClick = btnPesquisarClick
         ExplicitLeft = 707
+      end
+      object lblTituloRotina: TLabel
+        Left = 283
+        Top = 7
+        Width = 207
+        Height = 50
+        Margins.Right = 15
+        Alignment = taCenter
+        Anchors = [akLeft, akTop, akRight]
+        Caption = 'Pesquisa de Pedidos'
+        Color = 4275238
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clMoneyGreen
+        Font.Height = -21
+        Font.Name = 'Segoe UI Semilight'
+        Font.Style = []
+        GlowSize = 10
+        ParentColor = False
+        ParentFont = False
+        Layout = tlCenter
       end
     end
   end

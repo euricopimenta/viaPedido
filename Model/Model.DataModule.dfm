@@ -20,7 +20,7 @@
     UpdateOptions.RefreshMode = rmAll
     UpdateOptions.CheckReadOnly = False
     SQL.Strings = (
-      'select * from Item')
+      'select * from Item order by ID_ITEM')
     Left = 64
     Top = 120
     object qryItemID_ITEM: TIntegerField
@@ -31,6 +31,7 @@
       Origin = 'ID_ITEM'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
+      DisplayFormat = '0'
     end
     object qryItemDESC_ITEM: TStringField
       DisplayLabel = 'Descri'#231#227'o'
@@ -46,25 +47,6 @@
       'select * from pedidocab')
     Left = 64
     Top = 176
-    object qryPedidoID_PEDIDO_CAB: TIntegerField
-      FieldName = 'ID_PEDIDO_CAB'
-      Origin = 'ID_PEDIDO_CAB'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
-    end
-    object qryPedidoDT_EMISSAO: TDateField
-      FieldName = 'DT_EMISSAO'
-      Origin = 'DT_EMISSAO'
-    end
-    object qryPedidoNUMERO: TIntegerField
-      FieldName = 'NUMERO'
-      Origin = 'NUMERO'
-    end
-    object qryPedidoCLIENTE: TStringField
-      FieldName = 'CLIENTE'
-      Origin = 'CLIENTE'
-      Size = 100
-    end
   end
   object dtsPedido: TDataSource
     DataSet = qryPedido

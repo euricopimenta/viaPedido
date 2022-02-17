@@ -20,6 +20,5 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(Tfrm_Main, frm_Main);
   Application.CreateForm(TDataBase, DataBase);
-  Application.CreateForm(Tfrm_Pesquisa, frm_Pesquisa);
   Application.Run;
 end.

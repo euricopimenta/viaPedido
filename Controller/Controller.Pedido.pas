@@ -2,14 +2,12 @@ unit Controller.Pedido;
 
 interface
 Uses
-  Model.Pedido, Model.Pedido.Item, Model.DataModule, Data.DB, Vcl.Forms,
-  View.Pedido.Pesquisa;
+  Model.Pedido, Model.Pedido.Item, Model.DataModule, Data.DB, Vcl.Forms;
 
   Type TPedidoController = Class
   private
     FdtsPedido: TDataSource;
     procedure SetdtsPedido(const Value: TDataSource);
-    Function SetDtsPesquisaPedido : TDataSource;
 
   published
     Property dtsPedido : TDataSource read FdtsPedido write SetdtsPedido;
@@ -25,7 +23,8 @@ Uses
 implementation
 
 uses
-  System.SysUtils,Dialogs;
+  System.SysUtils,Dialogs,
+  View.Pedido.Pesquisa;
 { TPedidoController }
 
 
@@ -44,10 +43,15 @@ begin
 
 end;
 
+
 Function TPedidoController.BuscarPedidos(Sender:TForm) : TPedido;
 begin
+  //Carrega e Chama a tela de Pesquisa de Pedidos
+
   Application.CreateForm(Tfrm_Pesquisa,frm_Pesquisa);
   frm_Pesquisa.Parent := Sender.Parent;
+  frm_Pesquisa.dbgPedidos.DataSource := Database.dtsPedido;
+  frm_Pesquisa.btnPesquisarClick(nil);
   frm_Pesquisa.Show;
 
 end;
@@ -87,6 +91,7 @@ procedure TPedidoController.SetdtsPedido(const Value: TDataSource);
 begin
   FdtsPedido := Value;
 end;
+
 
 destructor TPedidoController.Destroy;
 begin

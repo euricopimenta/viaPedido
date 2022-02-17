@@ -354,7 +354,6 @@ object frm_Pedido: Tfrm_Pedido
       ReadOnly = True
       TabOrder = 0
       TextHint = 'N'#186' Pedido'
-      OnExit = edtNumeroExit
     end
     object edtCliente: TEdit
       Left = 165

@@ -39,7 +39,6 @@ type
     procedure edtCodItemKeyPress(Sender: TObject; var Key: Char);
     procedure btnAddClick(Sender: TObject);
     procedure edtValorExit(Sender: TObject);
-    procedure edtNumeroExit(Sender: TObject);
     procedure edtCodItemExit(Sender: TObject);
     procedure btnBuscarPedidosClick(Sender: TObject);
   private
@@ -145,7 +144,7 @@ end;
 
 procedure Tfrm_Pedido.btnBuscarPedidosClick(Sender: TObject);
 begin
-  Controller.BuscarPedidos;
+  Controller.BuscarPedidos(Self);
 end;
 
 procedure Tfrm_Pedido.btnNovoPedidoClick(Sender: TObject);

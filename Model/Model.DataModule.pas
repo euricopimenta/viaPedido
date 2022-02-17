@@ -18,10 +18,6 @@ type
     dtsPedido: TDataSource;
     qryPedidoItem: TFDQuery;
     dtsPedidoItem: TDataSource;
-    qryPedidoID_PEDIDO_CAB: TIntegerField;
-    qryPedidoDT_EMISSAO: TDateField;
-    qryPedidoNUMERO: TIntegerField;
-    qryPedidoCLIENTE: TStringField;
     dtsItem: TDataSource;
     Query: TFDQuery;
     qryItemID_ITEM: TIntegerField;
